@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#0284c7" />
+    <meta name="description" content="داروپلاس - محاسبه‌گر هوشمند دوز داروی اطفال" />
+    <title>داروپلاس - محاسبه‌گر دوز اطفال</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <div id="app" class="app-container">
+        
+        <header id="appHeader" class="app-header">
+            <div class="header-content">
+                <div class="brand">
+                    <span class="brand-icon" aria-hidden="true"><i class="fas fa-child"></i></span>
+                    <h1 class="brand-name">دارو<span>پلاس</span></h1>
+                </div>
+                <div class="header-actions">
+                    <button id="helpBtn" class="header-btn" aria-label="راهنمای برنامه">
+                        <i class="fas fa-question-circle" aria-hidden="true"></i>
+                    </button>
+                    <button id="favBtn" class="header-btn" aria-label="نشان کردن برنامه">
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- ===== OVERLAY برای حالت فوکوس ===== -->
+        <div id="focusOverlay" class="focus-overlay" hidden>
+            <div class="focus-backdrop"></div>
+            <div class="focus-content" id="focusContent">
+                <!-- محتوای فوکوس شده در اینجا تزریق می‌شود -->
+            </div>
+        </div>
+
+        <main id="mainContent" class="main-content" role="main">
+
+            <!-- ===== دسته‌بندی داروها ===== -->
+            <section id="categorySection" class="section" data-section="main">
+                <div class="category-header">
+                    <h2><i class="fas fa-layer-group"></i> دسته‌بندی داروها</h2>
+                    <span class="badge" id="drugCount">بارگذاری...</span>
+                </div>
+                <div class="category-grid" id="categoryGrid" role="tablist">
+                    <!-- Categories injected via JS -->
+                </div>
+            </section>
+
+            <!-- ===== جستجو ===== -->
+            <section id="searchSection" class="section" data-section="main">
+                <div class="search-box">
+                    <label for="searchInput" class="sr-only">جستجوی دارو</label>
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="جستجوی نام دارو، کاربرد یا فرم..." autocomplete="off" />
+                    <button id="clearSearch" class="clear-btn" aria-label="پاک کردن جستجو" hidden>
+                        <i class="fas fa-times-circle"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ===== لیست داروها ===== -->
+            <section id="drugSection" class="section" data-section="main">
+                <div class="drug-header">
+                    <h3><i class="fas fa-list-ul"></i> انتخاب دارو</h3>
+                    <span class="badge" id="resultCount">۰ قلم</span>
+                </div>
+                <div id="drugList" class="drug-list">
+                    <!-- Drugs injected via JS -->
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ===== BOTTOM NAV ===== -->
+        <nav id="bottomNav" class="bottom-nav">
+            <button class="nav-btn active" data-tab="home">
+                <i class="fas fa-home"></i>
+                <span>خانه</span>
+            </button>
+            <button class="nav-btn" data-tab="search">
+                <i class="fas fa-search"></i>
+                <span>جستجو</span>
+            </button>
+            <button class="nav-btn" data-tab="favorites">
+                <i class="fas fa-heart"></i>
+                <span>منتخب</span>
+            </button>
+            <button class="nav-btn" data-tab="history">
+                <i class="fas fa-clock"></i>
+                <span>سوابق</span>
+            </button>
+            <button class="nav-btn" data-tab="profile">
+                <i class="fas fa-user-md"></i>
+                <span>پروفایل</span>
+            </button>
+        </nav>
+
+        <!-- ===== FAB ===== -->
+        <button id="fabBtn" class="fab">
+            <i class="fas fa-search"></i>
+        </button>
+
+        <!-- ===== HELP MODAL ===== -->
+        <div id="helpModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+            <div class="modal-container">
+                <div class="modal-head">
+                    <h3 id="modalTitle"><i class="fas fa-info-circle"></i> راهنمای برنامه</h3>
+                    <button id="modalClose" class="modal-close"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-body">
+                    <div class="guide-item">
+                        <div class="guide-icon"><i class="fas fa-user-md"></i></div>
+                        <div class="guide-text">
+                            <strong>محاسبه علمی دوز اطفال</strong>
+                            <p>دوزها بر اساس آخرین رفرنس‌های معتبر اطفال (Nelson) و وزن دقیق بیمار محاسبه می‌شوند.</p>
+                        </div>
+                    </div>
+                    <div class="guide-item">
+                        <div class="guide-icon"><i class="fas fa-house-medical"></i></div>
+                        <div class="guide-text">
+                            <strong>شفافیت محاسباتی</strong>
+                            <p>فرمول دقیق محاسبه دوز برای هر بیمار نمایش داده می‌شود تا از صحت مقادیر اطمینان حاصل کنید.</p>
+                        </div>
+                    </div>
+                    <div class="guide-item">
+                        <div class="guide-icon"><i class="fas fa-expand"></i></div>
+                        <div class="guide-text">
+                            <strong>حالت فوکوس</strong>
+                            <p>با کلیک روی دکمه محاسبه دوز، صفحه به حالت فوکوس رفته و فقط همان دارو نمایش داده می‌شود.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
