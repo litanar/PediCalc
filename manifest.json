@@ -1,0 +1,20 @@
+{
+  "short_name": "محاسبات دارویی اطفال",
+  "name": "PedCAL",
+  "icons": [
+    {
+      "src": "icon192.png"",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#3498db"
+}
