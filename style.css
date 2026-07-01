@@ -1,0 +1,1102 @@
+:root {
+    --primary-50: #f0f9ff;
+    --primary-100: #e0f2fe;
+    --primary-500: #0ea5e9;
+    --primary-600: #0284c7;
+    --primary-700: #0369a1;
+    --primary-800: #075985;
+    
+    --accent-500: #14b8a6;
+    --accent-600: #0d9488;
+    
+    --warning-100: #fef3c7;
+    --warning-600: #d97706;
+    
+    --danger-100: #fee2e2;
+    --danger-500: #ef4444;
+    
+    --surface-main: #ffffff;
+    --surface-bg: #f8fafc;
+    
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-tertiary: #94a3b8;
+    
+    --border-light: #e2e8f0;
+    
+    --space-1: 8px;
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 32px;
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+    
+    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+    --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+    --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+    --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
+    
+    --header-height: 64px;
+    --nav-height: 72px;
+    
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Vazirmatn", sans-serif;
+    background-color: var(--surface-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+*:focus-visible {
+    outline: 2px solid var(--primary-500);
+    outline-offset: 2px;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    max-width: 480px;
+    margin: 0 auto;
+    background-color: var(--surface-bg);
+    position: relative;
+    box-shadow: var(--shadow-xl);
+}
+
+.app-header {
+    background-color: var(--surface-main);
+    height: var(--header-height);
+    padding: 0 var(--space-2);
+    display: flex;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.brand { display: flex; align-items: center; gap: var(--space-1); color: var(--primary-600); }
+.brand-icon { font-size: 1.5rem; }
+.brand-name { font-size: 1.25rem; font-weight: 800; margin: 0; }
+.brand-name span { color: var(--accent-600); }
+
+.header-actions { display: flex; gap: var(--space-2); }
+.header-btn {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color var(--transition-fast), transform var(--transition-fast);
+    padding: var(--space-1);
+}
+.header-btn:hover { color: var(--primary-600); }
+.header-btn:active { transform: scale(0.92); }
+
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-2);
+    padding-bottom: calc(var(--nav-height) + var(--space-3));
+    scroll-behavior: smooth;
+    transition: all 0.4s ease;
+}
+
+.section { margin-bottom: var(--space-3); }
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--space-2);
+}
+
+.category-header, .drug-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-2);
+}
+
+.category-header h2, .drug-header h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.badge {
+    font-size: 0.7rem;
+    background-color: var(--primary-100);
+    color: var(--primary-700);
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+}
+
+.category-item {
+    background-color: var(--surface-main);
+    border-radius: var(--radius-md);
+    padding: var(--space-2) var(--space-1);
+    text-align: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    border: 2px solid transparent;
+    transition: all var(--transition-fast);
+}
+
+.category-item:active { transform: scale(0.95); }
+.category-item.active { border-color: var(--primary-500); background-color: var(--primary-50); }
+
+.category-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--space-1);
+    background-color: var(--surface-bg);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    color: var(--primary-500);
+    overflow: hidden;
+    transition: all var(--transition-fast);
+}
+
+/* ===== استایل برای تصاویر دسته‌بندی ===== */
+.category-icon img.category-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-full);
+    padding: 6px;
+}
+
+.category-icon img.category-image.fallback {
+    padding: 12px;
+    background-color: var(--surface-bg);
+}
+
+.category-item.active .category-icon { 
+    background-color: var(--surface-main); 
+    box-shadow: 0 0 0 3px var(--primary-100); 
+}
+
+.category-name { font-size: 0.8rem; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+.category-count { font-size: 0.65rem; color: var(--text-tertiary); }
+
+.search-box { position: relative; display: flex; align-items: center; }
+.search-icon { position: absolute; right: var(--space-2); color: var(--text-tertiary); }
+
+.search-box input {
+    width: 100%;
+    padding: 14px 48px 14px var(--space-2);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-full);
+    font-size: 0.95rem;
+    font-family: inherit;
+    outline: none;
+    background: var(--surface-main);
+    transition: all var(--transition-fast);
+}
+
+.search-box input:focus { border-color: var(--primary-500); box-shadow: 0 0 0 4px var(--primary-100); }
+.clear-btn { position: absolute; left: var(--space-2); background: none; border: none; color: var(--text-tertiary); font-size: 1.25rem; cursor: pointer; padding: 4px; }
+.clear-btn:hover { color: var(--text-secondary); }
+
+.drug-list { display: flex; flex-direction: column; gap: var(--space-2); }
+
+.drug-list-card {
+    background-color: var(--surface-main);
+    border-radius: var(--radius-md);
+    padding: var(--space-2);
+    box-shadow: var(--shadow-sm);
+    border-right: 4px solid var(--primary-500);
+    transition: all var(--transition-fast);
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    overflow: hidden;
+}
+
+.drug-list-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.drug-list-card:active { transform: scale(0.98); }
+
+.drug-card-content { display: flex; gap: var(--space-2); align-items: center; }
+.drug-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    background-color: var(--primary-50);
+    color: var(--primary-600);
+    border-radius: var(--radius-full);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.drug-details { flex: 1; }
+.drug-name { font-weight: 800; font-size: 1rem; color: var(--text-primary); margin-bottom: 2px; }
+.drug-form { font-size: 0.7rem; font-weight: 600; color: var(--text-secondary); display: block; margin-bottom: 6px; }
+
+.drug-indications-mini { display: flex; flex-wrap: wrap; gap: 4px; }
+.tag-mini {
+    background-color: var(--surface-bg);
+    color: var(--text-secondary);
+    font-size: 0.6rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-light);
+}
+
+.select-drug-btn {
+    background: var(--primary-50);
+    border: 1px solid var(--primary-100);
+    color: var(--primary-700);
+    width: 100%;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+    font-family: inherit;
+}
+.drug-list-card:hover .select-drug-btn { background: var(--primary-100); }
+.select-drug-btn:active { transform: scale(0.95); }
+.select-drug-btn i { transition: transform var(--transition-fast); font-size: 0.85rem; }
+
+.empty-state { text-align: center; padding: var(--space-4) var(--space-2); color: var(--text-secondary); }
+.empty-state i { font-size: 3rem; color: var(--border-light); margin-bottom: var(--space-2); }
+.empty-state h3 { font-weight: 800; margin-bottom: var(--space-1); color: var(--text-primary); }
+.empty-state p { font-size: 0.85rem; }
+
+/* ===== FOCUS MODE STYLES ===== */
+.focus-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-3);
+    animation: focusFadeIn 0.3s ease-out;
+}
+
+.focus-overlay[hidden] {
+    display: none !important;
+}
+
+@keyframes focusFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.focus-backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.focus-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--surface-main);
+    border-radius: var(--radius-xl);
+    padding: var(--space-3);
+    box-shadow: var(--shadow-xl);
+    animation: focusSlideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes focusSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.focus-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+    padding-bottom: var(--space-2);
+    border-bottom: 2px solid var(--border-light);
+}
+
+.focus-header .focus-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.focus-header .focus-title .drug-name-highlight {
+    color: var(--primary-600);
+}
+
+.btn-back {
+    background: var(--surface-bg);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-full);
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: inherit;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all var(--transition-fast);
+}
+
+.btn-back:hover {
+    background: var(--primary-50);
+    border-color: var(--primary-500);
+    color: var(--primary-700);
+}
+
+.btn-back:active {
+    transform: scale(0.95);
+}
+
+.focus-drug-card {
+    background: var(--surface-bg);
+    border-radius: var(--radius-md);
+    padding: var(--space-2);
+    margin-bottom: var(--space-3);
+    border-right: 4px solid var(--primary-500);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.focus-drug-card .drug-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    background-color: var(--primary-100);
+    color: var(--primary-600);
+    border-radius: var(--radius-full);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.focus-drug-card .drug-info {
+    flex: 1;
+}
+
+.focus-drug-card .drug-info .drug-name {
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.focus-drug-card .drug-info .drug-form {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* محو کردن محتوای اصلی در حالت فوکوس */
+.main-content.blurred > * {
+    filter: blur(8px);
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.3;
+    transition: all 0.4s ease;
+}
+
+.main-content:not(.blurred) > * {
+    filter: blur(0);
+    pointer-events: auto;
+    user-select: auto;
+    opacity: 1;
+    transition: all 0.4s ease;
+}
+
+/* استایل‌های پنل محاسبه داخل فوکوس */
+.focus-calc-panel {
+    margin-top: var(--space-2);
+}
+
+.mdh-base-dose {
+    background: var(--primary-50);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mdh-base-dose span { color: var(--text-secondary); }
+.mdh-base-dose strong { color: var(--primary-700); font-weight: 700; direction: ltr; }
+
+.focus-calc-panel .weight-input-section {
+    background: var(--surface-main);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-2);
+    margin-bottom: var(--space-2);
+}
+
+.focus-calc-panel .weight-input-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.focus-calc-panel .weight-input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.focus-calc-panel .weight-input-group input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-md);
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: inherit;
+    text-align: center;
+    outline: none;
+    transition: border-color var(--transition-fast);
+}
+
+.focus-calc-panel .weight-input-group input:focus {
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 4px var(--primary-100);
+}
+
+.btn-primary {
+    background: var(--primary-600);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 0 var(--space-2);
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background var(--transition-fast);
+}
+.btn-primary:hover { background: var(--primary-700); }
+.btn-primary:active { transform: scale(0.95); }
+
+.focus-calc-panel .weight-error {
+    color: var(--danger-500);
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.focus-calc-panel .weight-error::before {
+    content: "\f071";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+}
+
+.focus-calc-result {
+    background: var(--surface-main);
+    border-radius: var(--radius-md);
+    padding: var(--space-2);
+    border: 1px solid var(--border-light);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.calc-final-result {
+    background: var(--primary-50);
+    border: 1px solid var(--primary-100);
+    border-radius: var(--radius-md);
+    padding: var(--space-2);
+    text-align: center;
+    margin-bottom: var(--space-2);
+}
+
+.calc-final-result.has-contraindication {
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+.cfr-header {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.cfr-amount {
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: var(--primary-700);
+    direction: ltr;
+    margin-bottom: 4px;
+}
+
+.calc-final-result.has-contraindication .cfr-amount {
+    color: #991b1b;
+}
+
+.cfr-interval {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.cfr-interval strong {
+    color: var(--text-primary);
+}
+
+.formula-box {
+    background: #f8fafc;
+    border: 1px dashed var(--text-tertiary);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    margin-bottom: var(--space-2);
+}
+
+.formula-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.formula-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    margin-bottom: 4px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding-bottom: 4px;
+}
+
+.formula-line:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.f-desc {
+    color: var(--text-secondary);
+    direction: ltr;
+    text-align: left;
+}
+
+.f-result {
+    color: var(--text-primary);
+    direction: ltr;
+}
+
+.f-result strong {
+    color: var(--primary-600);
+}
+
+.patient-validation {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    margin-bottom: var(--space-2);
+    border-right: 3px solid var(--primary-500);
+}
+
+.validation-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    padding: 4px 0;
+    font-weight: 600;
+}
+
+.validation-item.critical {
+    color: var(--danger-500);
+}
+
+.validation-item.high {
+    color: var(--warning-600);
+}
+
+.validation-item.low {
+    color: var(--text-tertiary);
+}
+
+.safety-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+}
+
+.safety-badge.safe {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.safety-badge.caution {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.safety-badge.dangerous {
+    background: #fee2e2;
+    color: #991b1b;
+    animation: pulse-danger 1.5s infinite;
+}
+
+@keyframes pulse-danger {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.drug-contraindication {
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    margin-bottom: var(--space-2);
+}
+
+.drug-contraindication.high {
+    background: #fee2e2;
+    border-right: 3px solid var(--danger-500);
+}
+
+.drug-contraindication.medium {
+    background: #fef3c7;
+    border-right: 3px solid var(--warning-600);
+}
+
+.contraindication-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #991b1b;
+}
+
+.contraindication-item i {
+    color: var(--danger-500);
+    margin-top: 2px;
+}
+
+.drug-validation-warnings {
+    background: #f0f9ff;
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    margin-bottom: var(--space-2);
+}
+
+.validation-warning-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    padding: 2px 0;
+}
+
+.drug-warning {
+    background-color: var(--warning-100);
+    color: var(--warning-600);
+    padding: 8px var(--space-2);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    margin-bottom: var(--space-2);
+}
+
+.drug-home-guide {
+    background-color: #f0fdfa;
+    border-right: 3px solid var(--accent-500);
+    padding: 10px var(--space-2);
+    border-radius: var(--radius-sm);
+}
+
+.home-guide-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--accent-600);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.home-guide-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.home-guide-note {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px dashed rgba(0,0,0,0.1);
+    font-size: 0.7rem;
+    color: var(--accent-600);
+    font-weight: 600;
+}
+
+/* ===== MODAL ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-smooth);
+    z-index: 50;
+}
+
+@media (min-width: 481px) {
+    .modal-overlay {
+        align-items: center;
+        padding: var(--space-2);
+    }
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-container {
+    background-color: var(--surface-main);
+    width: 100%;
+    max-width: 480px;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    box-shadow: var(--shadow-xl);
+    transform: translateY(100%);
+    transition: transform var(--transition-smooth);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 481px) {
+    .modal-container {
+        border-radius: var(--radius-lg);
+        transform: translateY(20px) scale(0.95);
+    }
+}
+
+.modal-overlay.active .modal-container {
+    transform: translateY(0) scale(1);
+}
+
+.modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 1px solid var(--border-light);
+    flex-shrink: 0;
+}
+
+.modal-head h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: 4px;
+    transition: color var(--transition-fast);
+}
+
+.modal-close:hover {
+    color: var(--danger-500);
+}
+
+.modal-body {
+    padding: var(--space-3);
+    overflow-y: auto;
+}
+
+.guide-item {
+    display: flex;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+}
+
+.guide-item:last-child {
+    margin-bottom: 0;
+}
+
+.guide-icon {
+    width: 44px;
+    height: 44px;
+    background-color: var(--primary-50);
+    color: var(--primary-600);
+    border-radius: var(--radius-full);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.guide-text strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.guide-text p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* ===== BOTTOM NAV ===== */
+.bottom-nav {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--surface-main);
+    height: var(--nav-height);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.04);
+    z-index: 10;
+    border-top: 1px solid var(--border-light);
+    flex-shrink: 0;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: var(--text-tertiary);
+    font-family: inherit;
+    font-size: 0.65rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    flex: 1;
+    height: 100%;
+    padding: 4px 0;
+}
+
+.nav-btn i {
+    font-size: 1.2rem;
+    transition: transform var(--transition-smooth);
+}
+
+.nav-btn:hover {
+    color: var(--text-secondary);
+}
+
+.nav-btn.active {
+    color: var(--primary-600);
+}
+
+.nav-btn.active i {
+    transform: translateY(-2px);
+}
+
+/* ===== FAB ===== */
+.fab {
+    position: absolute;
+    bottom: calc(var(--nav-height) + var(--space-2));
+    left: var(--space-2);
+    width: 52px;
+    height: 52px;
+    background-color: var(--accent-600);
+    color: white;
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+    z-index: 20;
+    transition: all var(--transition-fast);
+}
+
+.fab:hover {
+    background-color: var(--accent-500);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-xl);
+}
+
+.fab:active {
+    transform: scale(0.92);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 400px) {
+    .category-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+    .category-icon {
+        width: 54px;
+        height: 54px;
+        font-size: 1.5rem;
+    }
+    .cfr-amount {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .focus-content {
+        padding: var(--space-2);
+        max-height: 95vh;
+        border-radius: var(--radius-lg);
+    }
+    
+    .focus-header .focus-title {
+        font-size: 0.95rem;
+    }
+    
+    .btn-back {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+}
+
+/* ===== SCROLLBAR ===== */
+.focus-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.focus-content::-webkit-scrollbar-track {
+    background: var(--surface-bg);
+    border-radius: var(--radius-full);
+}
+
+.focus-content::-webkit-scrollbar-thumb {
+    background: var(--primary-300);
+    border-radius: var(--radius-full);
+}
+
+.focus-content::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-500);
+}
+
+.main-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.main-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    background: var(--primary-300);
+    border-radius: var(--radius-full);
+}
